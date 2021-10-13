@@ -1,11 +1,7 @@
 import { startOfWeek, endOfWeek, addWeeks, subWeeks, format } from 'date-fns';
+import { WeekPeriod } from '../../../interfaces/WeekPeriod';
 
 const Monday = 1;
-
-export interface WeekPeriod {
-  startOfWeek: Date;
-  endOfWeek: Date;
-}
 
 export function getWeekPeriodFromDate(date: Date): WeekPeriod {
   return {

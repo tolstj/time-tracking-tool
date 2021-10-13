@@ -3,7 +3,7 @@ import { Table } from 'antd';
 
 import { useAppSelector } from '../../app/hooks';
 import { selectSelectedWeekPeriod } from '../weekSwitcher/weekSwitcher.slice';
-import { getTableColumnsFromWeekPeriod } from './utils/table';
+import { getTableColumnsFromWeekPeriod, getTasksTableDataFromTasks } from './utils/table';
 import { selectSelectedWeekPeriodTasks } from './tasksTable.slice';
 
 export function TasksTable(): JSX.Element {
@@ -13,6 +13,7 @@ export function TasksTable(): JSX.Element {
   return (
     <Table
       columns={getTableColumnsFromWeekPeriod(selectedWeekPeriod)}
+      dataSource={getTasksTableDataFromTasks(tasks)}
     />
   );
 }

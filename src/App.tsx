@@ -13,11 +13,11 @@ function App() {
     <Row justify="center" gutter={16} style={{ marginTop: '50px' }}>
       <TaskInput />
     </Row>
-    <Row justify="center">
+    <Row justify="center" style={{ marginTop: '20px' }}>
       <TotalHours />
       <WeekSwitcher />
     </Row>
-    <Row justify="center">
+    <Row justify="center" style={{ marginTop: '20px' }}>
       <TasksTable />
     </Row>
     </>

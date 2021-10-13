@@ -30,7 +30,8 @@ function getWeekdaysColumnsFromWeekPeriod({ startOfWeek, endOfWeek }: WeekPeriod
   return eachDayOfInterval({
     start: startOfWeek,
     end: endOfWeek,
-  }).map((date) => ({
+  })
+  .map((date) => ({
     title: format(date, 'EEEEEE dd.MM', { locale: ru }),
     dataIndex: format(date, 'EEEEEE'),
   }));

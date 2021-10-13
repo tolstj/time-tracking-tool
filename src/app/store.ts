@@ -1,10 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import createSagaMiddleware from 'redux-saga';
+import taskInputReducer from '../features/taskInput/taskInput.slice';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    taskInput: taskInputReducer,
   },
+  middleware: [sagaMiddleware] as const,
 });
 
 export type AppDispatch = typeof store.dispatch;

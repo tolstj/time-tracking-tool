@@ -1,4 +1,4 @@
-import { takeEvery, select, put, call } from 'redux-saga/effects';
+import { takeEvery, select, put } from 'redux-saga/effects';
 import { cleared, selectTaskInput } from '../features/taskInput/taskInput.slice';
 import { addedTask } from '../features/tasksTable/tasksTable.slice';
 import { ADD_TASK } from '../features/taskInput/actions';

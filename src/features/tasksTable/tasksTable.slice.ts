@@ -11,9 +11,12 @@ export const tasksTableSlice = createSlice({
     addedTask: (state, { payload }: PayloadAction<Task>) => {
       state.push(payload)
     },
+    loadedTasks: (state, { payload }: PayloadAction<Task[]>) => {
+      return payload;
+    },
   },
 });
 
-export const { addedTask } = tasksTableSlice.actions;
+export const { addedTask, loadedTasks } = tasksTableSlice.actions;
 
 export default tasksTableSlice.reducer;

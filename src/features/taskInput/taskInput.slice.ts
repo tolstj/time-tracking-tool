@@ -1,20 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-const initialState: string = '';
+interface TaskInputState {
+  input: string;
+  error?: Error;
+}
+
+const initialState: TaskInputState = {
+  input: '',
+};
 
 export const taskInputSlice = createSlice({
   name: 'taskInput',
   initialState,
   reducers: {
-    changed: (state, action: PayloadAction<string>) => {
-      return action.payload;
+    changed: (state, { payload }: PayloadAction<string>) => {
+      state.input = payload;
+    },
+    cleared: (state) => {
+      state.input = '';
     },
   },
 });
 
-export const { changed } = taskInputSlice.actions;
+export const { changed, cleared } = taskInputSlice.actions;
 
-export const selectTaskInput = (state: RootState) => state.taskInput;
+export const selectTaskInput = (state: RootState) => state.taskInput.input;
 
 export default taskInputSlice.reducer;

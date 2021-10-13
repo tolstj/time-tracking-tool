@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { getCurrentWeekPeriod, getViewOfWeekPeriod, nextWeekPeriod, prevWeekPeriod, WeekPeriod } from './utils/week';
+import { getCurrentWeekPeriod, getViewOfWeekPeriod, nextWeekPeriod, prevWeekPeriod } from './utils/week';
+import { WeekPeriod } from '../../interfaces/WeekPeriod';
 
 const initialState: WeekPeriod = getCurrentWeekPeriod();
 

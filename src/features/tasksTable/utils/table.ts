@@ -1,7 +1,6 @@
 import { eachDayOfInterval, format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-
-import { WeekPeriod } from '../../weekSwitcher/utils/week';
+import { WeekPeriod } from '../../../interfaces/WeekPeriod';
 
 interface TableColumn {
   title: string;

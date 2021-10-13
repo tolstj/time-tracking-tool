@@ -3,6 +3,7 @@ import { Col, Input, Button } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { changed, selectTaskInput } from './taskInput.slice';
+import { addTask } from './actions';
 
 export function TaskInput(): JSX.Element {
   const taskInput = useAppSelector(selectTaskInput);
@@ -18,11 +19,18 @@ export function TaskInput(): JSX.Element {
         <Input
           value={taskInput}
           onChange={onChange}
-          placeholder="Мой проект / моя задача, номер тикета или URL тикета 1.5h"
+          placeholder="Название задачи"
         />
       </Col>
+
       <Col>
-        <Button type="primary">Добавить задачу</Button>
+        <Button
+          type="primary"
+          onClick={() => dispatch(addTask())}
+          disabled={!taskInput.trim()}
+        >
+          Добавить задачу
+        </Button>
       </Col>
     </>
   );

@@ -9,12 +9,15 @@ export const tasksTableSlice = createSlice({
   name: 'tasksTable',
   initialState,
   reducers: {
-    addedTask: (state, { payload }: PayloadAction<Task>) => {
-      state.push(payload)
-    },
     loadedTasks: (state, { payload }: PayloadAction<Task[]>) => {
       return payload;
     },
+    addedTask: (state, { payload }: PayloadAction<Task>) => {
+      state.push(payload)
+    },
+    // hoursUpdated: (state, { payload }: PayloadAction<>) => {
+
+    // },
   },
 });
 

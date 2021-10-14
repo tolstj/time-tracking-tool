@@ -1,0 +1,33 @@
+import React, { useState } from 'react';
+import { Input } from 'antd';
+import { useAppDispatch } from '../../app/hooks';
+import { WeekPeriod } from '../../interfaces/WeekPeriod';
+
+interface Props {
+  name: string;
+  weekPeriod: WeekPeriod;
+  hours: number;
+  weekday: string;
+}
+
+export function EditableHours({ name, weekPeriod, hours, weekday }: Props): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  const [changingHours, setChangingHours] = useState(hours);
+
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChangingHours(Number(event.target.value));
+  };
+
+  const saveHours = () => {
+    // dispatch(hoursUpdated({ name, weekPeriod, weekday, hours }));
+  };
+
+  return (
+    <Input
+      value={changingHours}
+      onChange={onChange}
+      onBlur={saveHours}
+    />
+  );
+}

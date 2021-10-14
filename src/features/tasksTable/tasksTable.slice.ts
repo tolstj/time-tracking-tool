@@ -2,6 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Task } from '../../interfaces/Task';
 import { format } from 'date-fns';
+import { TaskHoursUpdate } from './actions';
+import { dateFormat } from '../../utils/dateFormat';
+import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 
 const initialState: Task[] = [];
 
@@ -15,9 +18,18 @@ export const tasksTableSlice = createSlice({
     addedTask: (state, { payload }: PayloadAction<Task>) => {
       state.push(payload)
     },
-    // hoursUpdated: (state, { payload }: PayloadAction<>) => {
+    updatedTaskHours: (state, { payload }: PayloadAction<TaskHoursUpdate>) => {
+      const existingTask: {[key: string]: any} & WritableDraft<Task> | undefined = state.find(({ name, weekPeriod }) => {
+        const formattedTaskStartOfWeek = format(new Date(weekPeriod.startOfWeek), dateFormat);
+        const formattedPayloadStartOfWeek = format(new Date(payload.weekPeriod.startOfWeek), dateFormat);
 
-    // },
+        return (name === payload.name) && (formattedTaskStartOfWeek === formattedPayloadStartOfWeek);
+      });
+
+      if (existingTask) {
+        existingTask[payload.weekday] = payload.hours;
+      }
+    },
   },
 });
 
@@ -28,8 +40,8 @@ export const selectSelectedWeekPeriodTasks = (state: RootState) => {
 
   return state.tasksTable.filter(
     (task) => {
-      const formattedSelectedWeekStartOfWeek = format(new Date(selectedWeekStartOfWeek), 'dd.MM.yyyy');
-      const formattedTaskStartOfWeek = format(new Date(task.weekPeriod.startOfWeek), 'dd.MM.yyyy');
+      const formattedSelectedWeekStartOfWeek = format(new Date(selectedWeekStartOfWeek), dateFormat);
+      const formattedTaskStartOfWeek = format(new Date(task.weekPeriod.startOfWeek), dateFormat);
 
       return formattedSelectedWeekStartOfWeek === formattedTaskStartOfWeek;
     }

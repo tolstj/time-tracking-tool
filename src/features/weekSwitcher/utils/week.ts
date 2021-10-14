@@ -1,5 +1,6 @@
 import { startOfWeek, endOfWeek, addWeeks, subWeeks, format } from 'date-fns';
 import { WeekPeriod } from '../../../interfaces/WeekPeriod';
+import { dateFormat } from '../../../utils/dateFormat';
 
 const Monday = 1;
 
@@ -25,8 +26,8 @@ export function prevWeekPeriod({ startOfWeek }: WeekPeriod): WeekPeriod {
 }
 
 export function getViewOfWeekPeriod({ startOfWeek, endOfWeek }: WeekPeriod): string {
-  const startOfWeekView = format(startOfWeek, 'dd.MM.yyyy');
-  const endOfWeekView = format(endOfWeek, 'dd.MM.yyyy');
+  const startOfWeekView = format(startOfWeek, dateFormat);
+  const endOfWeekView = format(endOfWeek, dateFormat);
 
   return `${startOfWeekView} - ${endOfWeekView}`;
 }

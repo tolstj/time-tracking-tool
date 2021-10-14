@@ -7,7 +7,7 @@ import { EditableHours } from '../EditableHours';
 interface TableColumn {
   title: string;
   dataIndex: string;
-  render?: (taskUniqueInfo: TaskUniqueInfo) => JSX.Element;
+  render?: (taskUniqueInfo: TaskUniqueInfoWithWeekdayHours) => JSX.Element;
 }
 
 export function getTableColumnsFromWeekPeriod(weekPeriod: WeekPeriod): TableColumn[] {
@@ -32,7 +32,7 @@ function getWeekdaysColumnsFromWeekPeriod({ startOfWeek, endOfWeek }: WeekPeriod
   .map((date) => ({
     title: format(date, 'EEEEEE dd.MM', { locale: ru }),
     dataIndex: format(date, 'EEEE'),
-    render: ({ name, weekPeriod, hours }: TaskUniqueInfo) => (
+    render: ({ name, weekPeriod, hours }: TaskUniqueInfoWithWeekdayHours) => (
       <EditableHours
         name={name}
         weekPeriod={weekPeriod}
@@ -43,7 +43,7 @@ function getWeekdaysColumnsFromWeekPeriod({ startOfWeek, endOfWeek }: WeekPeriod
   })); 
 }
 
-interface TaskUniqueInfo {
+interface TaskUniqueInfoWithWeekdayHours {
   name: string;
   weekPeriod: WeekPeriod;
   hours: number;
@@ -51,20 +51,20 @@ interface TaskUniqueInfo {
 
 interface TasksTableData {
   name: string;
-  Monday: TaskUniqueInfo;
-  Tuesday: TaskUniqueInfo;
-  Wednesday: TaskUniqueInfo;
-  Thursday: TaskUniqueInfo;
-  Friday: TaskUniqueInfo;
-  Saturday: TaskUniqueInfo;
-  Sunday: TaskUniqueInfo;
+  Monday: TaskUniqueInfoWithWeekdayHours;
+  Tuesday: TaskUniqueInfoWithWeekdayHours;
+  Wednesday: TaskUniqueInfoWithWeekdayHours;
+  Thursday: TaskUniqueInfoWithWeekdayHours;
+  Friday: TaskUniqueInfoWithWeekdayHours;
+  Saturday: TaskUniqueInfoWithWeekdayHours;
+  Sunday: TaskUniqueInfoWithWeekdayHours;
   total: number;
   key: number;
 }
 
 export function getTasksTableDataFromTasks(tasks: Task[]): TasksTableData[] {
   return tasks.map(({ name, weekPeriod, hours }, index) => {
-    const taskUniqueInfo = {
+    const taskUniqueInfo: TaskUniqueInfoWithWeekdayHours = {
       name,
       weekPeriod,
       hours: 0,

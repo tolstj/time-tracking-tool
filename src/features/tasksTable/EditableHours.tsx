@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from 'antd';
 import { useAppDispatch } from '../../app/hooks';
 import { WeekPeriod } from '../../interfaces/WeekPeriod';
+import { updateTaskHours } from './actions';
 
 interface Props {
   name: string;
@@ -20,7 +21,7 @@ export function EditableHours({ name, weekPeriod, hours, weekday }: Props): JSX.
   };
 
   const saveHours = () => {
-    // dispatch(hoursUpdated({ name, weekPeriod, weekday, hours }));
+    dispatch(updateTaskHours({ name, weekPeriod, weekday, hours }));
   };
 
   return (

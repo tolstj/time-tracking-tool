@@ -43,6 +43,6 @@ function* addTask() {
 function* validateTaskName(taskName: string) {
   const tasks: Task[] = yield select(selectSelectedWeekPeriodTasks);
   if (tasks.some(({ name }) => name === taskName)) {
-    throw new Error(`На этой неделе уже есть задача с именем ${taskName}`);
+    throw new Error(`На этой неделе уже есть задача с именем "${taskName}"`);
   }
 }

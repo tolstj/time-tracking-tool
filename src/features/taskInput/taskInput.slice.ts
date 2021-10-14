@@ -1,13 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-interface TaskInputState {
-  input: string;
-  error?: Error;
-}
-
-const initialState: TaskInputState = {
+const initialState = {
   input: '',
+  errorMessage: '',
 };
 
 export const taskInputSlice = createSlice({
@@ -20,11 +16,18 @@ export const taskInputSlice = createSlice({
     cleared: (state) => {
       state.input = '';
     },
+    setErrorMessage: (state, { payload }: PayloadAction<string>) => {
+      state.errorMessage = payload;
+    },
+    clearErrorMessage: (state) => {
+      state.errorMessage = '';
+    },
   },
 });
 
-export const { changed, cleared } = taskInputSlice.actions;
+export const { changed, cleared, setErrorMessage, clearErrorMessage } = taskInputSlice.actions;
 
 export const selectTaskInput = (state: RootState) => state.taskInput.input;
+export const selectTaskInputError = (state: RootState) => state.taskInput.errorMessage;
 
 export default taskInputSlice.reducer;

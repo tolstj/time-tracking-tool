@@ -14,6 +14,7 @@ export function TasksTable(): JSX.Element {
     <Table
       columns={getTableColumnsFromWeekPeriod(selectedWeekPeriod)}
       dataSource={getTasksTableDataFromTasks(tasks)}
+      pagination={false}
     />
   );
 }

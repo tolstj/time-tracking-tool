@@ -26,9 +26,11 @@ export function EditableHours({ name, weekPeriod, hours, weekday }: Props): JSX.
 
   return (
     <Input
+      size="small"
       value={changingHours}
       onChange={onChange}
       onBlur={saveHours}
+      style={{ width: '30px', padding: '5px', textAlign: 'center' }}
     />
   );
 }

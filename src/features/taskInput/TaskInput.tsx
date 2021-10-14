@@ -15,13 +15,15 @@ export function TaskInput(): JSX.Element {
 
   return (
     <>
-      <Col span={8}>
+      <Col span={7}>
         <Input
           value={taskInput}
           onChange={onChange}
           placeholder="Название задачи"
         />
       </Col>
+
+      <Col span={1} />
 
       <Col>
         <Button

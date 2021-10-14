@@ -1,6 +1,6 @@
 import { takeEvery, select, put } from 'redux-saga/effects';
 import { cleared, selectTaskInput } from '../features/taskInput/taskInput.slice';
-import { addedTask } from '../features/tasksTable/tasksTable.slice';
+import { updatedTasks } from '../features/tasksTable/tasksTable.slice';
 import { ADD_TASK } from '../features/taskInput/actions';
 import { Task } from '../interfaces/Task';
 import { WeekPeriod } from '../interfaces/WeekPeriod';
@@ -29,7 +29,7 @@ function* addTask() {
     },
   };
 
-  yield LocalStorageAPI.saveTask(task);
-  yield put(addedTask(task));
+  const tasks: Task[] = yield LocalStorageAPI.saveTask(task);
+  yield put(updatedTasks(tasks));
   yield put(cleared());
 }

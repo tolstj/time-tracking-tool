@@ -1,4 +1,7 @@
+import { format } from 'date-fns';
+import { TaskHoursUpdate } from '../features/tasksTable/actions';
 import { Task } from '../interfaces/Task';
+import { dateFormat } from '../utils/dateFormat';
 
 const TASKS = 'TASKS';
 
@@ -13,10 +16,30 @@ export class LocalStorageAPI {
     return [];
   }
 
-  static saveTask(task: Task): void {
+  static saveTask(task: Task): Task[] {
     const tasks = this.getTasks();
     tasks.push(task);
 
     localStorage.setItem(TASKS, JSON.stringify(tasks));
+    return tasks;
+  }
+
+  static updateHours(taskHoursUpdate: TaskHoursUpdate): Task[] {
+    const tasks = this.getTasks();
+
+    const existingTask = tasks.find(({ name, weekPeriod }) => {
+      const formattedTaskStartOfWeek = format(new Date(weekPeriod.startOfWeek), dateFormat);
+      const formattedTaskHoursUpdateStartOfWeek = format(new Date(taskHoursUpdate.weekPeriod.startOfWeek), dateFormat);
+
+      return (name === taskHoursUpdate.name) && (formattedTaskStartOfWeek === formattedTaskHoursUpdateStartOfWeek);
+    });
+
+    if (existingTask) {
+      // @ts-ignore
+      existingTask.hours[taskHoursUpdate.weekday] = taskHoursUpdate.hours;
+    }
+
+    localStorage.setItem(TASKS, JSON.stringify(tasks));
+    return tasks;
   }
 }

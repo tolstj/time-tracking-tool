@@ -21,7 +21,7 @@ export function EditableHours({ name, weekPeriod, hours, weekday }: Props): JSX.
   };
 
   const saveHours = () => {
-    dispatch(updateTaskHours({ name, weekPeriod, weekday, hours }));
+    dispatch(updateTaskHours({ name, weekPeriod, weekday, hours: changingHours }));
   };
 
   return (

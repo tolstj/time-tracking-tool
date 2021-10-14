@@ -5,7 +5,7 @@ import { all } from 'redux-saga/effects';
 import taskInputReducer from '../features/taskInput/taskInput.slice';
 import weekSwitcherReducer from '../features/weekSwitcher/weekSwitcher.slice';
 import tasksTableReducer from '../features/tasksTable/tasksTable.slice';
-import { watchAddTask, watchLoadTasks } from '../sagas';
+import { watchAddTask, watchLoadTasks, watchUpdateTaskHours } from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,6 +13,7 @@ function* rootSaga() {
   yield all([
     watchAddTask(),
     watchLoadTasks(),
+    watchUpdateTaskHours(),
   ]);
 }
 

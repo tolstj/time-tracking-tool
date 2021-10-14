@@ -4,7 +4,6 @@ import { Task } from '../../interfaces/Task';
 import { format } from 'date-fns';
 import { TaskHoursUpdate } from './actions';
 import { dateFormat } from '../../utils/dateFormat';
-import { WritableDraft } from '@reduxjs/toolkit/node_modules/immer/dist/internal';
 
 const initialState: Task[] = [];
 
@@ -19,7 +18,7 @@ export const tasksTableSlice = createSlice({
       state.push(payload)
     },
     updatedTaskHours: (state, { payload }: PayloadAction<TaskHoursUpdate>) => {
-      const existingTask: {[key: string]: any} & WritableDraft<Task> | undefined = state.find(({ name, weekPeriod }) => {
+      const existingTask = state.find(({ name, weekPeriod }) => {
         const formattedTaskStartOfWeek = format(new Date(weekPeriod.startOfWeek), dateFormat);
         const formattedPayloadStartOfWeek = format(new Date(payload.weekPeriod.startOfWeek), dateFormat);
 
@@ -27,13 +26,14 @@ export const tasksTableSlice = createSlice({
       });
 
       if (existingTask) {
-        existingTask[payload.weekday] = payload.hours;
+        // @ts-ignore
+        existingTask.hours[payload.weekday] = payload.hours;
       }
     },
   },
 });
 
-export const { addedTask, loadedTasks } = tasksTableSlice.actions;
+export const { loadedTasks, addedTask, updatedTaskHours } = tasksTableSlice.actions;
 
 export const selectSelectedWeekPeriodTasks = (state: RootState) => {
   const selectedWeekStartOfWeek = state.weekSwitcher.startOfWeek;

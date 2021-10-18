@@ -35,8 +35,10 @@ function* addTaskToStorageAndUpdateStore() {
     const tasks: Task[] = yield LocalStorageAPI.saveTask(task);
     yield put(updatedTasks(tasks));
     yield put(cleared());
-  } catch (error: any) {
-    yield put(setErrorMessage(error.message));
+  } catch (error: unknown) {
+      if (error instanceof Error) {
+        yield put(setErrorMessage(error.message));
+      }
   }
 }
 

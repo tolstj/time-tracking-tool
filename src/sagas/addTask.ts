@@ -1,17 +1,17 @@
 import { takeEvery, select, put, call } from 'redux-saga/effects';
 import { cleared, selectTaskInput, setErrorMessage } from '../features/taskInput/taskInput.slice';
 import { selectSelectedWeekPeriodTasks, updatedTasks } from '../features/tasksTable/tasksTable.slice';
-import { ADD_TASK } from '../features/taskInput/actions';
+import { addTask } from '../features/taskInput/actions';
 import { Task } from '../interfaces/Task';
 import { WeekPeriod } from '../interfaces/WeekPeriod';
 import { selectSelectedWeekPeriod } from '../features/weekSwitcher/weekSwitcher.slice';
 import { LocalStorageAPI } from '../LocalStorageAPI/LocalStorageAPI';
 
 export function* watchAddTask() {
-  yield takeEvery(ADD_TASK, addTask);
+  yield takeEvery(addTask, addTaskToStorageAndUpdateStore);
 }
 
-function* addTask() {
+function* addTaskToStorageAndUpdateStore() {
   const taskInput: string = yield select(selectTaskInput);
   try {
     yield call(validateTaskName, taskInput);

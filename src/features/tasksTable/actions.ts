@@ -1,13 +1,8 @@
+import { createAction } from '@reduxjs/toolkit';
 import { WeekPeriod } from '../../interfaces/WeekPeriod';
 
-export const LOAD_TASKS = 'LOAD_TASKS';
-export const UPDATE_TASK_HOURS = 'UPDATE_TASK_HOURS';
-
-export const loadTasks = () => ({ type: LOAD_TASKS });
-export const updateTaskHours = (taskHoursUpdate: TaskHoursUpdate) => ({
-  type: UPDATE_TASK_HOURS,
-  payload: taskHoursUpdate,
-});
+export const loadTasks = createAction('LOAD_TASKS');
+export const updateTaskHours = createAction<TaskHoursUpdate>('UPDATE_TASK_HOURS');
 
 export interface TaskHoursUpdate {
   name: string;

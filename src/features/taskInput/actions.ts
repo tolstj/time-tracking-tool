@@ -1,3 +1,3 @@
-export const ADD_TASK = 'ADD_TASK';
+import { createAction } from '@reduxjs/toolkit';
 
-export const addTask = () => ({ type: ADD_TASK });
+export const addTask = createAction('ADD_TASK');

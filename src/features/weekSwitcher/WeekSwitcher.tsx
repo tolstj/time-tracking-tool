@@ -4,10 +4,10 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getViewOfWeekPeriod } from './utils/week';
-import { selectIsSelectedWeekPeriodCurrent, selectSelectedWeekPeriod, setCurrent, setNext, setPrev } from './weekSwitcher.slice';
+import { selectIsSelectedWeekPeriodCurrent, setCurrent, setNext, setPrev } from './weekSwitcher.slice';
 
 export function WeekSwitcher(): JSX.Element {
-  const selectedWeekPeriod = useAppSelector(selectSelectedWeekPeriod);
+  const selectedWeekPeriod = useAppSelector((state) => state.weekSwitcher);
   const isSelectedWeekPeriodCurrent = useAppSelector(selectIsSelectedWeekPeriodCurrent);
   const dispatch = useAppDispatch();
 

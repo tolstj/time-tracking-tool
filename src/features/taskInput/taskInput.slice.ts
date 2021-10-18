@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
 
 const initialState = {
   input: '',
@@ -26,8 +25,5 @@ export const taskInputSlice = createSlice({
 });
 
 export const { changed, cleared, setErrorMessage, clearErrorMessage } = taskInputSlice.actions;
-
-export const selectTaskInput = (state: RootState) => state.taskInput.input;
-export const selectTaskInputError = (state: RootState) => state.taskInput.errorMessage;
 
 export default taskInputSlice.reducer;

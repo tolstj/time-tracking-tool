@@ -23,7 +23,6 @@ export const weekSwitcherSlice = createSlice({
 
 export const { setCurrent, setNext, setPrev } = weekSwitcherSlice.actions;
 
-export const selectSelectedWeekPeriod = (state: RootState) => state.weekSwitcher;
 export const selectIsSelectedWeekPeriodCurrent = (state: RootState) => {
   const selectedWeekPeriod = state.weekSwitcher;
   const currentWeekPeriod = getCurrentWeekPeriod();

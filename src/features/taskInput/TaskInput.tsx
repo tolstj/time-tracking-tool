@@ -2,12 +2,12 @@ import React from 'react';
 import { Col, Input, Button, message } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { changed, clearErrorMessage, selectTaskInput, selectTaskInputError } from './taskInput.slice';
+import { changed, clearErrorMessage } from './taskInput.slice';
 import { addTask } from './actions';
 
 export function TaskInput(): JSX.Element {
-  const taskInput = useAppSelector(selectTaskInput);
-  const taskInputError = useAppSelector(selectTaskInputError);
+  const taskInput = useAppSelector((state) => state.taskInput.input);
+  const taskInputError = useAppSelector((state) => state.taskInput.errorMessage);
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {

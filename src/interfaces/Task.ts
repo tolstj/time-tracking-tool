@@ -7,6 +7,7 @@ export interface Task {
 }
 
 interface WeekdaysHours {
+  [key: string]: number;
   Monday: number;
   Tuesday: number;
   Wednesday: number;

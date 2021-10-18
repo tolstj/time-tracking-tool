@@ -35,7 +35,6 @@ export class LocalStorageAPI {
     });
 
     if (existingTask) {
-      // @ts-ignore
       existingTask.hours[taskHoursUpdate.weekday] = taskHoursUpdate.hours;
     }
 
